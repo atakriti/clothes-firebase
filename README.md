@@ -1,1 +1,2 @@
-# clothes-firebase
+# Fullstack Clothes Store with React, Firebase
+ 
