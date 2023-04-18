@@ -6,3 +6,9 @@
 button{
     cursor: pointer;
 }
+::-webkit-scrollbar{
+    background-color: white;
+}
+::-webkit-scrollbar-thumb{
+    background-color: black;
+}
