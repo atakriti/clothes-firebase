@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import "./shop.scss"
 import {data} from "../data"
+import { Link } from 'react-router-dom';
 function Shop() {
   // const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25];
   // ===================================== Pagination ===============================
@@ -10,6 +11,10 @@ function Shop() {
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
     setCurrentPage(pageNumber);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
   const pageRange = 5;
   const minPage = Math.max(1, currentPage - Math.floor(pageRange / 2));
@@ -20,13 +25,18 @@ for (let i = minPage; i <= maxPage; i++) {
 }
   // ===================================== Pagination End ===============================
 
-  
-
 return (
   <div className='shop'>
     <div className='products'>
       {data.slice((currentPage - 1) * 10, currentPage * 10).map((item) => (
-        <div className='product'>{item.id}</div>
+        <div className='product'>
+          <a className='pro-img'><img src={item.img} alt="" /></a>
+          <h2>{item.name}</h2>
+          <h3>{item.price}€</h3>
+          <h3>{item.gender.split(" ")[0].toString()[0].toUpperCase() + item.gender.split(" ")[0].toString().slice(1)}</h3>
+          <h3>{item.type.split(" ")[1].toString()[0].toUpperCase() + item.type.split(" ")[1].toString().slice(1)}</h3>
+          <Link className='pro-btn' to={`/single/${item.id}`}>Show now</Link>
+        </div>
       ))}
     </div>
     {/* Pagination buttons */}
@@ -36,6 +46,7 @@ return (
         {pageNumber}
       </button>
     ))} 
+      <h4>{ `Page ${currentPage} of ${totalPages}`}</h4>
 
 
 

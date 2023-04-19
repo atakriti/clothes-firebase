@@ -32,6 +32,8 @@
             display: flex;
             flex-wrap: wrap;
             width: min(100% - 3%,1000px);
+            border:1px rgb(211, 211, 211) solid;
+
             &:nth-child(2n){
                 flex-direction: row-reverse;
             }
