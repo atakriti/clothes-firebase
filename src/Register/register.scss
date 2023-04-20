@@ -1,0 +1,62 @@
+.register{
+    width: min(100% - 3%,1000px);
+    margin: 0 auto;
+    .register-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width:min(100% - 3%,500px);
+            padding: 1rem;
+            padding-bottom: 2rem;
+            h1{
+                margin-bottom: 2rem;
+                
+            }
+            input{
+                width: 100%;
+                padding: 0.5rem;
+                font-size: 1rem;
+                border: 1px lightgray solid;
+                border-radius: 10px;
+                margin-bottom: 1rem;
+                outline: none;
+                color: rgb(100, 100, 100);
+                &::placeholder{
+                    color: gray;
+                }
+            }
+            button{
+                width: min(100% - 10%,200px);
+                background-color: black;
+                color: white;
+                border-radius: 10px;
+                outline: none;
+                padding: 0.4rem 0;
+                transition: 0.5s;
+                border: 1px black solid;
+                &:hover{
+                    transition: 0.5s;
+                    background-color: white;
+                    color: black;
+                }
+            }
+            h4{
+                margin-top: 2rem;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+        .googleBtn{
+            border-top: 1px solid #c2c2c2;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            padding-top: 1rem;
+        }
+    }
+    
+}
