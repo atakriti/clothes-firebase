@@ -10,8 +10,18 @@ function Single() {
           <div className="single-container">
               <a><img src={findProductId?.img} alt="" /></a>
               <span>
-                  <h1>{findProductId.name}</h1>
-                  <h3>Price: { findProductId.price}€</h3>
+          <h1>{findProductId.name}</h1>
+          {findProductId.sale === undefined ? (
+          <h3>Price: { findProductId.price}€</h3>
+          ) : (
+              <>
+            <h3>Sale {findProductId.sale}%</h3>
+            <h3>{ findProductId.price - findProductId.price * findProductId.sale / 100}€</h3>
+            <h3 style={{ textDecoration: "line-through red", color: "red" }}>{findProductId.price}€</h3>
+                <h3>Price: {findProductId.price}€</h3>
+                </>
+          )}
+        
                   {/* ============= */}
                   {findProductId.type.includes("clothes") && 
                      <>

@@ -3,7 +3,6 @@ import "./shop.scss"
 import {data} from "../data"
 import { Link } from 'react-router-dom';
 function Shop() {
-  // const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25];
   // ===================================== Pagination ===============================
   const [currentPage, setCurrentPage] = useState(1);
   const [activePage, setActivePage] = useState(1);

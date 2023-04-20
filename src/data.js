@@ -8,7 +8,8 @@ export let data = [
         gender: "man all",
         type: "clothes casual all",
         size:"S",
-        id:1
+        id: 1,
+        sale:10
     },
     {
         name: "Jeans",
@@ -48,7 +49,8 @@ export let data = [
         gender: "man all",
         type: "clothes casual all",
         size:"S",
-        id:5
+        id: 5,
+        sale:20
     },
     {
         name: "Jeans",
@@ -98,7 +100,8 @@ export let data = [
         gender: "man all",
         type: "clothes casual all",
         size:"S",
-        id:10
+        id: 10,
+        sale:15
     },
     // =============================== formal man all =================
     {
@@ -169,7 +172,8 @@ export let data = [
         gender: "man all",
         type: "clothes formal all",
         size:"S",
-        id:17
+        id: 17,
+        sale:5
     },
     {
         name: "Suit",
@@ -220,7 +224,8 @@ export let data = [
         gender: "women all",
         type: "clothes casual all",
         size:"S",
-        id:22
+        id: 22,
+        sale:50
     },
     {
         name: "Avarol",
@@ -270,7 +275,8 @@ export let data = [
         gender: "women all",
         type: "clothes casual all",
         size:"S",
-        id:27
+        id: 27,
+        sale:70
     },
     {
         name: "Pant",
@@ -311,7 +317,8 @@ export let data = [
         gender: "women all",
         type: "clothes formal all",
         size:"S",
-        id:31
+        id: 31,
+        sale:20
     },
     {
         name: "Dress",
@@ -371,7 +378,8 @@ export let data = [
         gender: "women all",
         type: "clothes formal all",
         size:"S",
-        id:37
+        id: 37,
+        sale:10
     },
     {
         name: "Dress",
@@ -422,7 +430,8 @@ export let data = [
         gender: "man all",
         type: "shoes casual all",
         size:"38",
-        id:42
+        id: 42,
+        sale:10
     },
     {
         name: "AIR",
@@ -503,7 +512,8 @@ export let data = [
         gender: "man all",
         type: "shoes formal all",
         size:"38",
-        id:50
+        id: 50,
+        sale:10
     },
     {
         name: "Formal Shoes",
@@ -573,7 +583,8 @@ export let data = [
         gender: "man all",
         type: "shoes formal all",
         size:"38",
-        id:57
+        id: 57,
+        sale:10
     },
     {
         name: "Formal Shoes",
@@ -705,7 +716,8 @@ export let data = [
         gender: "women all",
         type: "shoes formal all",
         size:"38",
-        id:70
+        id: 70,
+        sale:20
     },
     {
         name: "High Heels",
@@ -806,7 +818,8 @@ export let data = [
         gender: "kids",
         type:"clothes all",
         size:"S",
-        id:80
+        id: 80,
+        sale:20
         },
         {
         name: " Pants",
@@ -896,7 +909,8 @@ export let data = [
         gender: "kids",
         type:" clothes all",
         size:"S",
-        id:89
+            id: 89,
+        sale:30
         },
         {
         name: "Overalls",
@@ -1007,7 +1021,8 @@ export let data = [
         gender: "kids",
         type:" shoes all",
         size:"15",
-        id:100
+            id: 100,
+        sale:40
         },
         {
         name: "Flats",
@@ -1128,7 +1143,8 @@ export let data = [
         gender: "women all",
         type:" bags all",
         size:"",
-        id:112
+            id: 112,
+        sale:60
         },
         {
         name: "Bag",
@@ -1260,7 +1276,8 @@ export let data = [
         gender: "women all",
         type:" accessories all",
         size:"",
-        id:125
+            id: 125,
+        sale:30
         },
         {
         name: "Hand bracelet",
@@ -1351,7 +1368,8 @@ export let data = [
         gender: "women all",
         type:"makeup all",
         size:"",
-        id:134
+            id: 134,
+        sale:10
         },
         {
         name: "Lipstick ",
@@ -1454,7 +1472,8 @@ export let data = [
         gender: "women all",
         type:"perfume all",
         size:"",
-        id:144
+            id: 144,
+        sale:5
         },
         // ============================== Perfumes for men all ======================
      
