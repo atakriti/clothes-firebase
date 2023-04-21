@@ -5,8 +5,11 @@ import {onAuthStateChanged} from "firebase/auth"
 export let context = createContext()
 function Context({ children }) {
     let [user, setUser] = useState()
+    console.log("🚀 ~ file: Context.jsx:8 ~ Context ~ user:", user)
     let [users, setUsers] = useState()
+ 
     let userCollection = collection(db, "users")
+    let findUser = users?.find(item => item?.email === user?.email)
     let fetchingUsers = async () => {
         await onSnapshot(userCollection, (snapshot) => {
                 setUsers(snapshot.docs.map(doc => ({...doc.data(),id:doc.id})))
@@ -18,7 +21,7 @@ function Context({ children }) {
     }, [])
     
   return (
-      <context.Provider value={{user, setUser}}>{ children}</context.Provider>
+      <context.Provider value={{user, setUser,users,findUser}}>{ children}</context.Provider>
   )
 }
 

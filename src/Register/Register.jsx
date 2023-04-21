@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GoogleButton from "react-google-button";
 import "./register.scss";
 import { auth, googleProvider,db } from "../firebase"
 import {addDoc,collection} from "firebase/firestore"
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,signInWithPopup,updateProfile,onAuthStateChanged} from "firebase/auth"
+import { context } from "../Context";
+import { useNavigate } from "react-router-dom";
 function Register() {
+  let { findUser, user,users } = useContext(context)
+  let navigate = useNavigate()
+
   // Firebase
   let userCollection = collection(db,"users")
   // end firebase
@@ -34,6 +39,8 @@ function Register() {
         emailSi: "",
         passwordSi: ""
       })
+      navigate("/")
+
     } catch (error) {
       alert(error.message)
     }
@@ -54,22 +61,26 @@ function Register() {
         passwordSu: "",
         displayName:""
       })
+      navigate("/")
       
     } catch (error) {
       alert(error.message)
     }
   }
-  let hangleGoogle = async () => {
+  let handleGoogle = async () => {
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
-      if (user.email === undefined) {
-        // Add the user to the userCollection
+      if (users.some(item => item.email === user.email)) {
+        navigate("/")   
+      } else {
         await addDoc(userCollection, {
           email: user.email,
           displayName: user.displayName,
           cart: [],
         });
+      navigate("/")
       }
+    
     } catch (error) {
       alert(error.message);
     }
@@ -78,7 +89,16 @@ function Register() {
   return (
     <div className="register">
       <div className="register-container">
-        {/* Sign in */}
+
+        {user ? (
+          <>
+            <form>
+          <button onClick={() => signOut(auth)}>Sign out</button>
+            </form>
+          </>
+        ) : (
+            <>
+             {/* Sign in */}
         {switchRegister === 1 && (
           <form onChange={handleChangeSignin} onSubmit={handleSignin} >
             <h1>Sign in</h1>
@@ -103,8 +123,12 @@ function Register() {
         )}
 
         <div className="googleBtn">
-          <GoogleButton onClick={hangleGoogle} />
+          <GoogleButton onClick={handleGoogle} />
         </div>
+            </>
+    )}
+
+       
       </div>
     </div>
   );

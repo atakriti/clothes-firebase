@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import logo from "../images/clothes-logo.png"
 import { BiUser } from "react-icons/bi"
 import { BsCart2 } from "react-icons/bs"
 import "./header.scss"
+import { context } from '../Context'
 function Header() {
+    let { findUser, user } = useContext(context)
+    console.log("🚀 ~ file: Header.jsx:10 ~ Header ~ findUser:", findUser)
+    // window.location.pathname
   return (
       <header>
           <div className="logo">
@@ -20,9 +24,16 @@ function Header() {
               </ul>
               <span>
                   {/* User */}
-                  <Link to="/register"><BiUser/><h3>Anwar</h3></Link>
-                  {/* cart */}
-                  <Link to="/cart"><BsCart2/><h3>3</h3></Link>
+                  {/* user.photoURL */}
+                  {user ? (
+                      <>
+                      <Link to="/register">{user?.photoURL !== null ? (<img src={user.photoURL} alt="" />) : (<BiUser />)}<h3>{ findUser?.displayName}</h3></Link>
+                  <Link to="/cart"><BsCart2 /><h3>{ findUser?.cart?.length}</h3></Link>
+                    
+                      </>
+                  ): (
+                    <Link className='login-btn' to="/register">Login</Link>
+                  )}
               </span>
           </nav>
     </header>

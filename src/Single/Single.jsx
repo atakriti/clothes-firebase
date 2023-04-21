@@ -1,10 +1,45 @@
-import React from 'react'
+import React, { useState,useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import { collection,updateDoc,doc,FieldValue,arrayUnion,getDoc } from 'firebase/firestore'
+import { db } from '../firebase'
 import {data} from "../data"
 import "./single.scss"
+import { context } from '../Context'
 function Single() {
     let { id } = useParams()
-    let findProductId = data.find(item => item?.id === Number(id))
+  let findProductId = data.find(item => item?.id === Number(id))
+  let [quantity, setQuantity] = useState(1)
+  let [size, setSize] = useState(findProductId.size)
+  let finalProduct = {...findProductId,quan:quantity,size:size}
+  let {findUser} = useContext(context)
+  console.log("🚀 ~ file: Single.jsx:15 ~ Single ~ findUser:", findUser)
+  // ====================================================
+  let handleMinus = () => {
+    if (quantity < 2) {
+      return;
+    }
+    setQuantity(quantity - 1)
+  }
+  // ===================== Add
+  let handleAddProduct = async () => {
+    let loggedinUser = doc(db, "users", findUser?.id);
+  
+    try {
+      const docSnapshot = await getDoc(loggedinUser); // First get the whole document
+      const currentCart = docSnapshot.get("cart") || []; // Second get into property inside the document
+      if (currentCart.some(item => item.id === findProductId.id)) {
+        let newItem = currentCart.map(item => item.id === findProductId.id ? { ...item, quan: item.quan + 1 } : item)  
+      await updateDoc(loggedinUser, { cart: newItem });
+        return;
+      }
+  
+      const newCart = [...currentCart, finalProduct];
+  
+      await updateDoc(loggedinUser, { cart: newCart });
+    } catch (error) {
+      alert(error.message);
+    }
+  }
   return (
       <div className='single'>
           <div className="single-container">
@@ -26,9 +61,9 @@ function Single() {
                   {findProductId.type.includes("clothes") && 
                      <>
                           <h3>Select The size</h3>
-                          <select  >
+                          <select onChange={(e) => setSize(e.target.value)}  >
                             <option  value="" >Select</option>
-                          <option defaultChecked value="S">S</option>
+                          <option selected defaultChecked value="S">S</option>
                           <option  value="M">M</option>
                           <option  value="L">L</option>
                               
@@ -39,9 +74,9 @@ function Single() {
                       {findProductId.type.includes("shoes") && findProductId.gender.includes("man") &&
                      <>
                           <h3>Select The size</h3>
-                          <select  >
+                          <select onChange={(e) => setSize(e.target.value)} >
                             <option  value="" >Select</option>
-                          <option defaultChecked value="38">38</option>
+                          <option selected defaultChecked value="38">38</option>
                           <option  value="40">40</option>
                           <option  value="42">42</option>
                               
@@ -52,9 +87,9 @@ function Single() {
                       {findProductId.type.includes("shoes") && findProductId.gender.includes("women") &&
                      <>
                           <h3>Select The size</h3>
-                          <select  >
+                          <select onChange={(e) => setSize(e.target.value)} >
                             <option  value="" >Select</option>
-                          <option defaultChecked value="38">38</option>
+                          <option selected defaultChecked value="38">38</option>
                           <option  value="40">40</option>
                           <option  value="42">42</option>
                               
@@ -65,9 +100,9 @@ function Single() {
                       {findProductId.type.includes("shoes") && findProductId.gender.includes("kids") && 
                      <>
                           <h3>Select The size</h3>
-                          <select  >
+                          <select onChange={(e) => setSize(e.target.value)} >
                             <option  value="" >Select</option>
-                          <option defaultChecked value="18">18</option>
+                          <option selected defaultChecked value="18">18</option>
                           <option  value="20">20</option>
                           <option  value="22">22</option>
                               
@@ -77,11 +112,11 @@ function Single() {
 
                       {/* ============= */}
                   <div className="single-btns">
-                      <button>-</button>
-                      <h5>3</h5>
-                      <button>+</button>
+                      <button onClick={handleMinus}>-</button>
+                        <h5>{quantity}</h5>
+                      <button onClick={() => setQuantity(quantity + 1)}>+</button>
                   </div>
-                  <button>Add to cart</button>
+                  <button onClick={handleAddProduct}>Add to cart</button>
               </span>
             </div>
       </div>
