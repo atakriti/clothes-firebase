@@ -1,17 +1,18 @@
 import React, { useState,useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams , useNavigate } from 'react-router-dom'
 import { updateDoc,doc,getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import {data} from "../data"
 import "./single.scss"
 import { context } from '../Context'
 function Single() {
+  let navigate = useNavigate()
     let { id } = useParams()
   let findProductId = data.find(item => item?.id === Number(id))
   let [quantity, setQuantity] = useState(1)
   let [size, setSize] = useState(findProductId.size)
   let finalProduct = {...findProductId,quan:quantity,size:size}
-  let {findUser} = useContext(context)
+  let {findUser,user} = useContext(context)
   console.log("🚀 ~ file: Single.jsx:15 ~ Single ~ findUser:", findUser)
   // ====================================================
   let handleMinus = () => {
@@ -118,8 +119,13 @@ function Single() {
                       <button onClick={handleMinus}>-</button>
                         <h5>{quantity}</h5>
                       <button onClick={() => setQuantity(quantity + 1)}>+</button>
-                  </div>
-                  <button onClick={handleAddProduct}>Add to cart</button>
+          </div>
+          {user ? (
+          
+            <button onClick={handleAddProduct}>Add to cart</button>
+          ): (
+            <button onClick={() => navigate("/register")} >Login</button>  
+          )}
               </span>
             </div>
       </div>

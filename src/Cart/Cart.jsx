@@ -35,7 +35,10 @@ function Cart() {
   };
   return (
     <div className="cart">
-      <div className="cartContainer">
+      {findUser?.cart.length === 0 ? (
+      <h1>Your cart is empty !</h1>
+      ): (
+        <div className="cartContainer">
         <div className="titles">
           <div className="title_1">
             <h4>Products</h4>
@@ -79,9 +82,9 @@ function Cart() {
               <h4>{item.quan}</h4>
               {item.sale === undefined ? (
                         
-                <h4>{item.price * item.quan}€</h4>
+                <h4>{(item.price * item.quan)?.toFixed(1) }€</h4>
               ): (
-                  <h4>{(item.price - (item.price * item.sale) / 100) * item.quan }</h4>
+                  <h4>{((item.price - (item.price * item.sale) / 100) * item.quan)?.toFixed(1) }€</h4>
                         )}
 
             </div>
@@ -90,11 +93,13 @@ function Cart() {
         <div className="total-amount">
           <span>
             <h3>Subtotal</h3>
-            <h3>{total}€</h3>
+            <h3>{total?.toFixed(1)}€</h3>
           </span>
           <button>Checkout</button>
         </div>
       </div>
+      )}
+     
     </div>
   );
 }

@@ -93,7 +93,7 @@ function Register() {
         {user ? (
           <>
             <form>
-          <button onClick={() => signOut(auth)}>Sign out</button>
+          <button onClick={() => signOut(auth)}>Logout</button>
             </form>
           </>
         ) : (
@@ -101,10 +101,10 @@ function Register() {
              {/* Sign in */}
         {switchRegister === 1 && (
           <form onChange={handleChangeSignin} onSubmit={handleSignin} >
-            <h1>Sign in</h1>
+            <h1>Login</h1>
             <input placeholder="E-Mail..." type="email" name="emailSi" value={signinValue.emailSi} />
             <input placeholder="Password... (Min 6 character)" type="password" name="passwordSi" value={signinValue.passwordSi} />
-            <button>Sign in</button>
+            <button>Login</button>
             <h4 onClick={() => setSwitchRegister(2)}>Don't have an account?</h4>
           </form>
         )}
