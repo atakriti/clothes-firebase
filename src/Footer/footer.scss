@@ -12,15 +12,27 @@ footer{
     .android{
         width: min(100% - 3%, 200px);
         margin: 1rem 0;
+        
         a{
             display: flex;
             justify-content: space-around;
             align-items: center;
             background-color: white;
+        border: 1px white solid;
+
             padding: 0.3rem 0;
             border-radius: 20px;
             cursor: pointer;
             width: 100%;
+            transition: 0.5s;
+            &:hover{
+            transition: 0.5s;
+                background-color: black;
+                h5{
+                    color: white;
+                }
+               
+            }
             h5{
                 color: black;
                 font-size: 1rem;

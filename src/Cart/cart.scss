@@ -1,0 +1,103 @@
+.cart{
+    width: min(100% - 3%,1000px);
+    margin: 0 auto;
+    .cartContainer{
+        .titles{
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            h4{
+                color: white;
+            }
+            .title_1{
+                width: min(30%,300px);
+            }
+            span{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: min(50%,500px);
+            }
+        }
+        .singleCart{
+            border: 1px lightgray solid;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            .cart-left{
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                border-right: 1px lightgray solid;
+                width: min(30%,300px);
+                
+                a{
+                    cursor: pointer;
+                    display: flex;
+                    // width: 5rem;
+                    flex: 1 1 100px;
+
+                    img{
+                        width: 100%;
+                        height: 6rem;
+                        // aspect-ratio: 3/3;
+                        object-fit: cover;
+                    }
+                }
+                .cart_content{
+                    flex: 1 1 100px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    h4{
+                        color: red;
+                        margin-top: 1rem;
+                        cursor: pointer;
+                        transition: 0.5s;
+                        &:hover{
+                            transition: 0.5s;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+            .cart-right{
+                width: min(50%,500px);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+
+            }
+        }
+        .total-amount{
+            width: min(100% - 3%,500px);
+            margin-left: auto;
+            border-top: 1px solid #000;
+            span{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+            }
+            button{
+                border: 1px black solid;
+                background-color: black;
+                outline: none;
+                color: white;
+                padding: 0.7rem 0;
+                width: min(100%);
+                font-size: 1rem;
+                transition: 0.5s;
+                &:hover{
+                    transition: 0.5s;
+                    background-color:white;
+                    color: black;
+                }
+            }
+        }
+    }
+}

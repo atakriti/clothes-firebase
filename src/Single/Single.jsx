@@ -1,6 +1,6 @@
 import React, { useState,useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { collection,updateDoc,doc,FieldValue,arrayUnion,getDoc } from 'firebase/firestore'
+import { updateDoc,doc,getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import {data} from "../data"
 import "./single.scss"
@@ -28,14 +28,17 @@ function Single() {
       const docSnapshot = await getDoc(loggedinUser); // First get the whole document
       const currentCart = docSnapshot.get("cart") || []; // Second get into property inside the document
       if (currentCart.some(item => item.id === findProductId.id)) {
-        let newItem = currentCart.map(item => item.id === findProductId.id ? { ...item, quan: item.quan + 1 } : item)  
-      await updateDoc(loggedinUser, { cart: newItem });
+        let newItem = currentCart.map(item => item.id === findProductId.id ? { ...item, quan: item.quan + quantity,size:size } : item)  
+        await updateDoc(loggedinUser, { cart: newItem });
+        setQuantity(1)
         return;
       }
   
       const newCart = [...currentCart, finalProduct];
   
       await updateDoc(loggedinUser, { cart: newCart });
+      setQuantity(1)
+
     } catch (error) {
       alert(error.message);
     }
