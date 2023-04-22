@@ -80,4 +80,122 @@
             color: white;
           }
     }
+    // ===========================
+    .filterBtn{
+        width: min(100% - 3%,170px);
+        position: fixed;
+        bottom: 2rem;
+        button{
+            width: 100%;
+            padding: 0.5rem 0;
+            background-color: rgb(223, 145, 0);
+            border: none;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            outline: none;
+            span{
+            font-size: 1.1rem;
+                color: white;
+            }
+            svg{
+                fill: white;
+                font-size: 1.7rem;
+            }
+        }
+    }
+    // ===========================================
+   .filter-main{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.575);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    .filtering{
+        background-color: black; 
+        padding: 1rem;
+        color: white;
+        width: min(100% - 3%,500px);
+        border-radius: 20px;
+        // margin:0 auto;
+        .top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1{
+                font-size: 2rem;
+            }
+            svg{
+                font-size: 2rem;
+                background-color: white;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: 0.5s;
+                &:hover{
+                    transition: 0.5s;
+                    background-color: rgb(110, 110, 110);
+                }
+            }
+        }
+        .gender{
+            display: flex;
+            flex-direction: column;
+            margin: 1rem 0;
+            h2{
+                margin-bottom: 1rem;
+            }
+            span{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                label{
+                    padding: 0.5rem 0;
+                    width: 90%;
+                }
+                input{
+                    width: 1.1rem;
+                    height: 1.1rem;
+                }
+            }
+        }
+        .price{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            input{
+                width: 50%;
+            }
+        }
+        .type{
+            display: flex;
+            flex-direction: column;
+            margin: 1rem 0;
+            h2{
+                margin-bottom: 1rem;
+            }
+           
+            span{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                label{
+                    padding: 0.5rem 0;
+                    width: 90%;
+                }
+                input{
+                    width: 1.1rem;
+                    height: 1.1rem;
+                }
+
+            }
+        }
+
+    }
+   }
 }  
