@@ -13,7 +13,6 @@ function Single() {
   let [size, setSize] = useState(findProductId.size)
   let finalProduct = {...findProductId,quan:quantity,size:size}
   let {findUser,user,setLoading} = useContext(context)
-  console.log("🚀 ~ file: Single.jsx:15 ~ Single ~ findUser:", findUser)
   // ====================================================
   let handleMinus = () => {
     if (quantity < 2) {
@@ -46,6 +45,7 @@ function Single() {
 
     } catch (error) {
       alert(error.message);
+      setLoading(false)
     }
   }
   return (

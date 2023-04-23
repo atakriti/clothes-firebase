@@ -37,7 +37,9 @@ function Checkout() {
             setIsCheckout(false)
             navigate("/")
         } catch (error) {
-                alert(error.message)
+            alert(error.message)
+          setLoading(false)
+            
         }
     }
 
@@ -66,6 +68,8 @@ function Checkout() {
             navigate("/")
         } catch (error) {
             alert(error.message)
+          setLoading(false)
+
         }
      
     }

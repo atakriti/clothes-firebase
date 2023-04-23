@@ -7,7 +7,6 @@ import "./header.scss"
 import { context } from '../Context'
 function Header() {
     let { findUser, user } = useContext(context)
-    console.log("🚀 ~ file: Header.jsx:10 ~ Header ~ user:", user)
     // window.location.pathname
   return (
       <header>

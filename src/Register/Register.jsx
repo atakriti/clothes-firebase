@@ -45,7 +45,7 @@ function Register() {
       navigate("/")
 
     } catch (error) {
-      alert(error.message)
+      alert(error.message.split("/")[1].replace(")", ""))
       setLoading(false)
     }
   }
@@ -72,7 +72,8 @@ function Register() {
       })
       
     } catch (error) {
-      alert(error.message)
+      alert(error.message.split("/")[1].replace(")", ""))
+      setLoading(false)
     }
   }
   let handleGoogle = async () => {
@@ -95,6 +96,8 @@ function Register() {
     
     } catch (error) {
       alert(error.message);
+      setLoading(false)
+
     }
   }
 
