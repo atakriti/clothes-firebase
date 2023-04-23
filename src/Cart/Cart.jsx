@@ -35,6 +35,7 @@ function Cart() {
       }
     } catch (error) {
       alert(error.message);
+      setLoading(false)
     }
   };
   return (
