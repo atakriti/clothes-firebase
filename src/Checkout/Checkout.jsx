@@ -6,7 +6,7 @@ import { db } from '../firebase';
 import "./checkout.scss"
 import { useNavigate } from 'react-router-dom';
 function Checkout() {
-    let { findUser, isCheckout, setIsCheckout } = useContext(context);
+    let { findUser, isCheckout, setIsCheckout,setLoading } = useContext(context);
     let navigate = useNavigate()
     let [isPayment, setIsPayment] = useState(1)
     let [addressValue, setAddressValue] = useState({
@@ -23,6 +23,8 @@ function Checkout() {
         try {
             // adding new property to the object
             let theUser = doc(db, "users", findUser?.id)
+      setLoading(true)
+
             await updateDoc(theUser, {
                 street: addressValue.street,
                 city: addressValue.city,
@@ -30,6 +32,8 @@ function Checkout() {
                 phone: addressValue.phone,
                 cart:[]
             })
+      setLoading(false)
+
             setIsCheckout(false)
             navigate("/")
         } catch (error) {
@@ -53,9 +57,17 @@ function Checkout() {
     let handleDone2 = async (e) => {
         e.preventDefault()
         let theUser = doc(db, "users", findUser?.id)
-        await updateDoc(theUser,{cart:[]})
-        setIsCheckout(false)
-        navigate("/")
+        try {
+            setLoading(true)
+            await updateDoc(theUser, { cart: [] })
+          setLoading(false)
+            
+            setIsCheckout(false)
+            navigate("/")
+        } catch (error) {
+            alert(error.message)
+        }
+     
     }
   return (
       <div className='checkout'>

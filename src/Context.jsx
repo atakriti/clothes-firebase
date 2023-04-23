@@ -10,6 +10,7 @@ function Context({ children }) {
  
     let userCollection = collection(db, "users")
     let findUser = users?.find(item => item?.email === user?.email)
+    let [loading,setLoading] = useState(false)
     let fetchingUsers = async () => {
         await onSnapshot(userCollection, (snapshot) => {
                 setUsers(snapshot.docs.map(doc => ({...doc.data(),id:doc.id})))
@@ -22,7 +23,7 @@ function Context({ children }) {
     }, [])
     
   return (
-      <context.Provider value={{user, setUser,users,findUser,isCheckout,setIsCheckout}}>{ children}</context.Provider>
+      <context.Provider value={{user, setUser,users,findUser,isCheckout,setIsCheckout,loading,setLoading}}>{ children}</context.Provider>
   )
 }
 

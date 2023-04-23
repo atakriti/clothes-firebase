@@ -7,7 +7,7 @@ import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,signIn
 import { context } from "../Context";
 import { useNavigate } from "react-router-dom";
 function Register() {
-  let { findUser, user,users } = useContext(context)
+  let { findUser, user,users,setLoading } = useContext(context)
   let navigate = useNavigate()
 
   // Firebase
@@ -34,7 +34,10 @@ function Register() {
   let handleSignin = async (e) => {
     e.preventDefault()
     try {
+      setLoading(true)
       await signInWithEmailAndPassword(auth, signinValue.emailSi, signinValue.passwordSi)
+      setLoading(false)
+
       setSigninValue({
         emailSi: "",
         passwordSi: ""
@@ -48,20 +51,24 @@ function Register() {
   let handleSignup = async (e) => {
     e.preventDefault()
     try {
+      setLoading(true)
       // method on the User object returned by the createUserWithEmailAndPassword()
-      const {user} = await createUserWithEmailAndPassword(auth, signupValue.emailSu, signupValue.passwordSu);
+      const { user } = await createUserWithEmailAndPassword(auth, signupValue.emailSu, signupValue.passwordSu);
+      navigate("/")
+      // This update profile, is update the property which is in the user object which is proveded from firebase and it update it originaly, Console.log the user to more understand
       await updateProfile(user, { displayName: signupValue.displayName });
       await addDoc(userCollection, {
         email: signupValue.emailSu,
         displayName:signupValue.displayName,
         cart:[]
       })
+      setLoading(false)
+
       setSignupValue({
         emailSu: "",
         passwordSu: "",
         displayName:""
       })
-      navigate("/")
       
     } catch (error) {
       alert(error.message)
@@ -69,6 +76,7 @@ function Register() {
   }
   let handleGoogle = async () => {
     try {
+      setLoading(true)
       const { user } = await signInWithPopup(auth, googleProvider);
       if (users.some(item => item.email === user.email)) {
         navigate("/")   
@@ -78,6 +86,8 @@ function Register() {
           displayName: user.displayName,
           cart: [],
         });
+      setLoading(false)
+
       navigate("/")
       }
     

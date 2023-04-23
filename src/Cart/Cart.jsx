@@ -7,7 +7,7 @@ import { context } from "../Context";
 import "./cart.scss";
 import Checkout from "../Checkout/Checkout";
 function Cart() {
-  let { findUser,isCheckout,setIsCheckout } = useContext(context);
+  let { findUser,isCheckout,setIsCheckout,setLoading } = useContext(context);
   // const total = findUser?.cart
   //   .map((item) => item.quan * item.price)
   //   .reduce((acc, curr) => acc + curr, 0);
@@ -22,12 +22,15 @@ function Cart() {
   let handleDelete = async (item) => {
     let selectedUser = doc(db, "users", findUser?.id);
     try {
+      setLoading(true)
       let getDocument = await getDoc(selectedUser);
       let currentCart = getDocument.get("cart") || [];
 
       if (currentCart.some((it) => it.id === item.id)) {
         let filtering = currentCart.filter((single) => single.id !== item.id);
         await updateDoc(selectedUser, { cart: filtering });
+      setLoading(false)
+
         return;
       }
     } catch (error) {

@@ -12,3 +12,34 @@ button{
 ::-webkit-scrollbar-thumb{
     background-color: black;
 }
+// ====================================== Loader =====================
+.loading{
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.788);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loader{
+        font-size: 48px;
+        color: #FFF;
+        display: inline-block;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        position: relative;
+      }
+      .loader:after{
+        content: '';
+        height: 4px;
+        width:0%;
+        display: block;
+        background: #FF3D00;
+        animation: 5s lineGrow linear infinite;
+      }
+      
+      @keyframes lineGrow {to{width: 100%;}}
+}

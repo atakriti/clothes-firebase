@@ -12,7 +12,7 @@ function Single() {
   let [quantity, setQuantity] = useState(1)
   let [size, setSize] = useState(findProductId.size)
   let finalProduct = {...findProductId,quan:quantity,size:size}
-  let {findUser,user} = useContext(context)
+  let {findUser,user,setLoading} = useContext(context)
   console.log("🚀 ~ file: Single.jsx:15 ~ Single ~ findUser:", findUser)
   // ====================================================
   let handleMinus = () => {
@@ -28,16 +28,20 @@ function Single() {
     try {
       const docSnapshot = await getDoc(loggedinUser); // First get the whole document
       const currentCart = docSnapshot.get("cart") || []; // Second get into property inside the document
+      setLoading(true)
       if (currentCart.some(item => item.id === findProductId.id)) {
-        let newItem = currentCart.map(item => item.id === findProductId.id ? { ...item, quan: item.quan + quantity,size:size } : item)  
+        let newItem = currentCart.map(item => item.id === findProductId.id ? { ...item, quan: item.quan + quantity, size: size } : item)  
+        setLoading(true)
         await updateDoc(loggedinUser, { cart: newItem });
         setQuantity(1)
+        setLoading(false)
         return;
       }
   
       const newCart = [...currentCart, finalProduct];
   
       await updateDoc(loggedinUser, { cart: newCart });
+      setLoading(false)
       setQuantity(1)
 
     } catch (error) {
