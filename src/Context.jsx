@@ -5,7 +5,7 @@ import {onAuthStateChanged} from "firebase/auth"
 export let context = createContext()
 function Context({ children }) {
     let [user, setUser] = useState()
-    console.log("🚀 ~ file: Context.jsx:8 ~ Context ~ user:", user)
+    let [isCheckout,setIsCheckout] = useState(false)
     let [users, setUsers] = useState()
  
     let userCollection = collection(db, "users")
@@ -15,13 +15,14 @@ function Context({ children }) {
                 setUsers(snapshot.docs.map(doc => ({...doc.data(),id:doc.id})))
         })
     }
+
     useEffect(() => {
         onAuthStateChanged(auth, (current) => setUser(current))
         fetchingUsers()
     }, [])
     
   return (
-      <context.Provider value={{user, setUser,users,findUser}}>{ children}</context.Provider>
+      <context.Provider value={{user, setUser,users,findUser,isCheckout,setIsCheckout}}>{ children}</context.Provider>
   )
 }
 

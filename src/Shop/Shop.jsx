@@ -1,4 +1,5 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
+import useLocalStorage from 'use-local-storage';
 import "./shop.scss"
 import {data} from "../data"
 import { Link } from 'react-router-dom';
@@ -8,24 +9,19 @@ function Shop() {
   // =====================================Filtering ============================
   let [showFilter, setShowFilter] = useState(false)
   let [filterGender, setFilterGender] = useState("")
+  console.log("🚀 ~ file: Shop.jsx:12 ~ Shop ~ filterGender:", filterGender)
   let [filterType, setFilterType] = useState("")
+  console.log("🚀 ~ file: Shop.jsx:14 ~ Shop ~ filterType:", filterType)
   let [price, setPrice] = useState(500)
-  // let filterd = (item) => (
-  //   item.price <= price &&
-  //   item.gender.includes(filterGender.toLowerCase()) &&
-  //   item.type.includes(filterType.toLowerCase()) &&
-  //   item.name.toLowerCase()
-  // )
+
   let filterdData = data.filter(item => item.price <= price &&
     item.gender.includes(filterGender.toLowerCase()) &&
-    item.type.includes(filterType.toLowerCase()) &&
-    item.name.toLowerCase())
+    item.type.includes(filterType.toLowerCase()) )
   // ===================================== End Filtering ============================
   // ===================================== Pagination ===============================
   const [currentPage, setCurrentPage] = useState(1);
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(Math.ceil(filterdData.length / 10));
-  console.log("🚀 ~ file: Shop.jsx:28 ~ Shop ~ totalPages:", totalPages)
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
     setCurrentPage(pageNumber);
@@ -44,7 +40,8 @@ for (let i = minPage; i <= maxPage; i++) {
   useEffect(() => {
     // to refresh the totalPages once the data is filtered
     setTotalPages(Math.ceil(filterdData.length / 10))
-  },[filterdData])
+  }, [filterdData])
+
   // ===================================== Pagination End ===============================
 
 return (
@@ -87,20 +84,20 @@ return (
                <form className='gender'>
                    <h2>Gender</h2>
                   <span>
-                      <label htmlFor="all">All</label>
-                       <input onChange={(e)=>setFilterGender(e.target.value)} type="radio" defaultChecked name="gender" value="all" id='all' />
+                      <label htmlFor="all-gender">All</label>
+                       <input onChange={(e)=>setFilterGender("")} type="radio" defaultChecked name="gender" value="" id='all-gender' checked={filterGender === ""}   />
                   </span>
                   <span>
                        <label htmlFor="man">Men</label>
-                       <input onChange={(e)=>setFilterGender(e.target.value)}  type="radio" name="gender" value="man" id='man' />
+                       <input onChange={(e)=>setFilterGender(e.target.value)}  type="radio" name="gender" value="man" id='man' checked={filterGender === "man"} />
                   </span>
                    <span>
                        <label htmlFor="women">Women</label>
-                       <input onChange={(e)=>setFilterGender(e.target.value)}  type="radio" name="gender" value="women" id='women' />
+                       <input onChange={(e)=>setFilterGender(e.target.value)}  type="radio" name="gender" value="women" id='women' checked={filterGender === "women"} />
                    </span>
                    <span>
                    <label htmlFor="kids">Kids</label>
-               <input onChange={(e)=>setFilterGender(e.target.value)}  type="radio" name="gender" value="kids" id='kids' />
+               <input onChange={(e)=>setFilterGender(e.target.value)}  type="radio" name="gender" value="kids" id='kids' checked={filterGender === "kids"} />
                    </span>
                </form>
                {/* ====================== Prices ================ */}
@@ -114,31 +111,31 @@ return (
                    <h2>Type</h2>
                    <span>
                        <label htmlFor="all">All</label>
-                       <input onChange={(e)=>setFilterType(e.target.value)} defaultChecked type="radio" name="type" id="all" value="all" />
+                       <input onChange={(e)=>setFilterType("")} defaultChecked type="radio" name="type" id="all" value="" checked={filterType === ""} />
                   </span>
                   <span>
                        <label htmlFor="shoes">Shoes</label>
-                       <input onChange={(e)=>setFilterType(e.target.value)} type="radio" name="type" id="shoes" value="shoes" />
+                       <input onChange={(e)=>setFilterType(e.target.value)} type="radio" name="type" id="shoes" value="shoes" checked={filterType === "shoes"}  />
                   </span>
                   <span>
                        <label htmlFor="clothes">Clothes</label>
-                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="clothes" value="clothes" />
+                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="clothes" value="clothes" checked={filterType === "clothes"}  />
                   </span>
                    <span>
                        <label htmlFor="accessories">Accessories</label>
-                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="accessories" value="accessories" />
+                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="accessories" value="accessories" checked={filterType === "accessories"}  />
                    </span>
                   <span>
                        <label htmlFor="perfume">Perfumes</label>
-                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="perfume" value="perfume" />
+                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="perfume" value="perfume" checked={filterType === "perfume"}  />
                   </span>
                    <span>
                        <label htmlFor="makeup">Makeup</label>
-                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="makeup" value="makeup" />
+                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="makeup" value="makeup" checked={filterType === "makeup"} />
                    </span>
                    <span>
                        <label htmlFor="bag">Bags</label>
-                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="bag" value="bag" />
+                       <input onChange={(e)=>setFilterType(e.target.value)}  type="radio" name="type" id="bag" value="bag" checked={filterType === "bag"} />
                    </span>
                </form>
           </div>

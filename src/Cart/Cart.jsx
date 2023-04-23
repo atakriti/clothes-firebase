@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 import { context } from "../Context";
 import "./cart.scss";
+import Checkout from "../Checkout/Checkout";
 function Cart() {
-  let { findUser } = useContext(context);
+  let { findUser,isCheckout,setIsCheckout } = useContext(context);
   // const total = findUser?.cart
   //   .map((item) => item.quan * item.price)
   //   .reduce((acc, curr) => acc + curr, 0);
@@ -35,6 +36,8 @@ function Cart() {
   };
   return (
     <div className="cart">
+      {isCheckout && <Checkout/>}
+
       {findUser?.cart.length === 0 ? (
       <h1>Your cart is empty !</h1>
       ): (
@@ -86,7 +89,6 @@ function Cart() {
               ): (
                   <h4>{((item.price - (item.price * item.sale) / 100) * item.quan)?.toFixed(1) }€</h4>
                         )}
-
             </div>
           </div>
         ))}
@@ -95,7 +97,7 @@ function Cart() {
             <h3>Subtotal</h3>
             <h3>{total?.toFixed(1)}€</h3>
           </span>
-          <button>Checkout</button>
+          <button onClick={()=>setIsCheckout(true)}>Checkout</button>
         </div>
       </div>
       )}
