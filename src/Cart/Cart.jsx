@@ -10,7 +10,7 @@ function Cart() {
   let { findUser,isCheckout,setIsCheckout,setLoading } = useContext(context);
   // const total = findUser?.cart
   //   .map((item) => item.quan * item.price)
-  //   .reduce((acc, curr) => acc + curr, 0);
+  //   .reduce((acc, curr) => acc + curr, 0)
   const total = findUser?.cart.map(item => {
     let totalPrice = item.quan * item.price;
     if (item.sale) {
