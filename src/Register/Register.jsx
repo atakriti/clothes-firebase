@@ -46,6 +46,7 @@ function Register() {
 
     } catch (error) {
       alert(error.message)
+      setLoading(false)
     }
   }
   let handleSignup = async (e) => {
@@ -78,8 +79,9 @@ function Register() {
     try {
       setLoading(true)
       const { user } = await signInWithPopup(auth, googleProvider);
-      if (users.some(item => item.email === user.email)) {
-        navigate("/")   
+      if (users?.some(item => item?.email === user?.email)) {
+        navigate("/")  
+        setLoading(false)
       } else {
         await addDoc(userCollection, {
           email: user.email,

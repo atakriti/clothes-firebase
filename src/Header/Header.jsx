@@ -7,6 +7,7 @@ import "./header.scss"
 import { context } from '../Context'
 function Header() {
     let { findUser, user } = useContext(context)
+    console.log("🚀 ~ file: Header.jsx:10 ~ Header ~ user:", user)
     // window.location.pathname
   return (
       <header>
@@ -26,7 +27,8 @@ function Header() {
                   {/* user.photoURL */}
                   {user ? (
                       <>
-                      <Link to="/register">{user?.photoURL !== null ? (<img src={user.photoURL} alt="" />) : (<BiUser />)}<h3>{ findUser?.displayName}</h3></Link>
+                      <Link to="/register">{user?.photoURL !== null ? (<img src={user?.photoURL} alt="" />) : (<BiUser />)}<h3>{ findUser?.displayName}</h3></Link>
+                      {/* <Link to="/register"><img src={"https://lh3.googleusercontent.com/a/AGNmyxZ9q5BxwRey7ggoe8F6ndOwotN0L9s-_RE7i9gC=s96-c"} alt="" /><h3>{ findUser?.displayName}</h3></Link> */}
                   <Link to="/cart"><BsCart2 /><h3>{ findUser?.cart?.length}</h3></Link>
                     
                       </>
